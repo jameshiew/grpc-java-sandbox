@@ -1,0 +1,19 @@
+syntax = 'proto3';
+
+package colors;
+
+option java_package = "net.hiew.sandbox.colors";
+
+service Colors {
+    rpc GetColor (GetColorRequest) returns (Color);
+}
+
+message GetColorRequest {
+    string name = 1;
+}
+
+message Color {
+    uint32 red = 1;
+    uint32 green = 2;
+    uint32 blue = 3;
+}
