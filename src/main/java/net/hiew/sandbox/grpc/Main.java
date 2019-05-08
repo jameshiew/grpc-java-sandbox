@@ -12,9 +12,11 @@ final class Main {
   private Main() {}
 
   public static void main(String... args) {
+    logger.info("Building server...");
     final var server =
         ServerBuilder.forPort(8080).addService(new net.hiew.sandbox.colors.Service()).build();
 
+    logger.info("Starting server...");
     try {
       server.start();
     } catch (IOException e) {
@@ -29,5 +31,6 @@ final class Main {
       logger.error("Interrupted while awaiting termination, will shut down now", e);
       System.exit(1);
     }
+    logger.info("Server terminated");
   }
 }
