@@ -21,6 +21,7 @@ final class Main {
       logger.error("Couldn't start server", e);
       System.exit(1);
     }
+    logger.info("Server started on port {}", server.getPort());
 
     try {
       server.awaitTermination();
