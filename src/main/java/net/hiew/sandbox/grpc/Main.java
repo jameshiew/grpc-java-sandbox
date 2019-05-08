@@ -24,6 +24,16 @@ final class Main {
       System.exit(1);
     }
     logger.info("Server started on port {}", server.getPort());
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      public void run() {
+        // Use stderr here since the logger may have been reset by its JVM shutdown hook.
+        System.err.println("*** shutting down gRPC server since JVM is shutting down");
+        server.shutdown();
+        System.err.println("*** server shut down");
+      }
+    });
+
 
     try {
       server.awaitTermination();
