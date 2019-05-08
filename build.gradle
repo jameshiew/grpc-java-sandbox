@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id "com.google.protobuf" version "0.8.8"
-    id "idea"
+    id 'com.google.protobuf' version '0.8.8'
+    id 'idea'
 }
 
 group 'net.hiew'
@@ -12,6 +12,28 @@ targetCompatibility = '1.11'
 
 repositories {
     mavenCentral()
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.6.1"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.19.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+    }
 }
 
 dependencies {
@@ -33,22 +55,5 @@ jar {
     }
     from {  // bundle all dependencies inside the .jar
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
-
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.6.1"
-    }
-    plugins {
-        grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.19.0'
-        }
-    }
-    generateProtoTasks {
-        all()*.plugins {
-            grpc {}
-        }
     }
 }
