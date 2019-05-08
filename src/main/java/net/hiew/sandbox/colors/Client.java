@@ -8,12 +8,15 @@ import org.slf4j.LoggerFactory;
 final class Client {
   private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
-  private Client() {
-  }
+  private Client() {}
 
   public static void main(String[] args) {
-    ManagedChannel channel = NettyChannelBuilder.forAddress("localhost", 8080).build();
+    logger.info("Building channel to gRPC service...");
+    ManagedChannel channel =
+        NettyChannelBuilder.forAddress("localhost", 8080).usePlaintext().build();
+    logger.info("Creating stub...");
     ColorsGrpc.ColorsBlockingStub stub = ColorsGrpc.newBlockingStub(channel);
+    logger.info("Making gRPC call...");
     final var response =
         stub.getColor(ColorsOuterClass.GetColorRequest.newBuilder().setName("test").build());
     logger.info("{}", response);
