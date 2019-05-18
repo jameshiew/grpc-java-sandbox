@@ -38,7 +38,7 @@ final class Client {
 
   private static ClientInterceptor getAuthClientInterceptor() {
     final var metadata = new Metadata();
-    metadata.put(Metadata.Key.of("AUTH_TOKEN", Metadata.ASCII_STRING_MARSHALLER), "12345");
+    metadata.put(sandbox.Metadata.Headers.AUTH_TOKEN, "12345");
     return MetadataUtils.newAttachHeadersInterceptor(metadata);
   }
 }
