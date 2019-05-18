@@ -34,7 +34,7 @@ public final class AuthenticationInterceptor implements ServerInterceptor {
         return new ServerCall.Listener<ReqT>() {
           @Override
           public void onMessage(ReqT message) {
-            return;
+            return;  // noop
           }
         };
       }
