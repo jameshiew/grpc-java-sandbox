@@ -1,4 +1,4 @@
-package net.hiew.sandbox.grpc;
+package sandbox;
 
 import io.grpc.ServerBuilder;
 import org.slf4j.Logger;
@@ -6,15 +6,15 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-final class Main {
-  private static final Logger logger = LoggerFactory.getLogger(Main.class);
+final class Server {
+  private static final Logger logger = LoggerFactory.getLogger(Server.class);
 
-  private Main() {}
+  private Server() {}
 
   public static void main(String... args) {
     logger.info("Building server...");
     final var server =
-        ServerBuilder.forPort(8080).addService(new net.hiew.sandbox.colors.Service()).build();
+        ServerBuilder.forPort(8080).addService(new Service()).build();
 
     logger.info("Starting server...");
     try {

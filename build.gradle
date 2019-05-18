@@ -4,7 +4,7 @@ plugins {
     id 'idea'
 }
 
-group 'net.hiew'
+group 'sandbox'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 11
@@ -54,7 +54,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'net.hiew.sandbox.grpc.Main'
+                'Main-Class': 'sandbox.Server'
         )
     }
     from {  // bundle all dependencies inside the .jar

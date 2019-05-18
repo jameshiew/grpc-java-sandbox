@@ -1,7 +1,9 @@
-package net.hiew.sandbox.colors;
+package sandbox;
 
 import io.grpc.ManagedChannel;
 import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
+import net.hiew.sandbox.colors.ColorsGrpc;
+import net.hiew.sandbox.colors.ColorsOuterClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
