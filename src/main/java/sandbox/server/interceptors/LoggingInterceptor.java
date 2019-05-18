@@ -13,7 +13,10 @@ public final class LoggingInterceptor implements ServerInterceptor {
   @Override
   public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
       ServerCall<ReqT, RespT> call, Metadata headers, ServerCallHandler<ReqT, RespT> next) {
-    logger.info("Received call to {}", call.getMethodDescriptor().getFullMethodName());
+    logger.info(
+        "Received call to {} with headers {}",
+        call.getMethodDescriptor().getFullMethodName(),
+        headers);
     return next.startCall(call, headers);
   }
 }
