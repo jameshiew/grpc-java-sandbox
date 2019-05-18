@@ -13,3 +13,7 @@ A starting point for experimenting with [grpc-java](https://github.com/grpc/grpc
 gradle jar
 java -jar build/libs/grpc-java-sandbox-1.0-SNAPSHOT.jar
 ```
+
+# Running the client
+
+Currently the easiest way is to run the `Client` class' `main()` method from within IntelliJ.
