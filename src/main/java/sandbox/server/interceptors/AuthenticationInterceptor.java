@@ -4,6 +4,8 @@ import io.grpc.Metadata;
 import io.grpc.ServerCall;
 import io.grpc.ServerCallHandler;
 import io.grpc.ServerInterceptor;
+import io.grpc.Status;
+import io.grpc.StatusRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +20,7 @@ public final class AuthenticationInterceptor implements ServerInterceptor {
   public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
       ServerCall<ReqT, RespT> call, Metadata headers, ServerCallHandler<ReqT, RespT> next) {
     if (!EXPECTED_AUTH_TOKEN.equals(headers.get(AUTH_TOKEN_HEADER))) {
-      throw new RuntimeException("Unauthenticated!");
+      throw new StatusRuntimeException(Status.UNAUTHENTICATED);
     }
     return next.startCall(call, headers);
   }
