@@ -25,19 +25,25 @@ final class Client {
     logger.info("Building channel to gRPC service...");
     final Map<String, Object> serviceConfig = new HashMap<>(1);
     final Map<String, Object> retryPolicy = new HashMap<>(5);
-    serviceConfig.put("retryPolicy", retryPolicy);
     retryPolicy.put("maxAttempts", 4.0);
-    retryPolicy.put("initialBackoff", "0.1s");
-    retryPolicy.put("maxBackoff", "1s");
+    retryPolicy.put("initialBackoff", "1s");
+    retryPolicy.put("maxBackoff", "10s");
     retryPolicy.put("backoffMultiplier", 2.0);
     retryPolicy.put("retryableStatusCodes", ImmutableList.of("UNAVAILABLE"));
+    final Map<String, Object> name = new HashMap<>(1);
+    name.put("service", "colors.Colors");
+    final Map<String, Object> methodConfig = new HashMap<>(2);
+    methodConfig.put("name", ImmutableList.of(name));
+    methodConfig.put("retryPolicy", retryPolicy);
+    serviceConfig.put("methodConfig", ImmutableList.of(methodConfig));
 
     ManagedChannel channel =
         NettyChannelBuilder.forAddress("localhost", 8080)
             .usePlaintext()
+            .enableRetry()
             .defaultServiceConfig(serviceConfig)
             .build();
-    logger.info("Creating stub...");
+    logger.info("Creating stub with service config {}", serviceConfig);
     ColorsGrpc.ColorsBlockingStub stub =
         ColorsGrpc.newBlockingStub(channel)
             .withInterceptors(getAuthClientInterceptor(), new LoggingInterceptor());
