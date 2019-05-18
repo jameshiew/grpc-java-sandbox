@@ -23,18 +23,22 @@ final class Client {
 
   public static void main(String[] args) {
     logger.info("Building channel to gRPC service...");
-    final Map<String, Object> serviceConfig = new HashMap<>(1);
+
+    final Map<String, Object> name = new HashMap<>(1);
+    name.put("service", "colors.Colors");
+
     final Map<String, Object> retryPolicy = new HashMap<>(5);
     retryPolicy.put("maxAttempts", 4.0);
     retryPolicy.put("initialBackoff", "1s");
     retryPolicy.put("maxBackoff", "10s");
     retryPolicy.put("backoffMultiplier", 2.0);
     retryPolicy.put("retryableStatusCodes", ImmutableList.of("UNAVAILABLE"));
-    final Map<String, Object> name = new HashMap<>(1);
-    name.put("service", "colors.Colors");
+
     final Map<String, Object> methodConfig = new HashMap<>(2);
     methodConfig.put("name", ImmutableList.of(name));
     methodConfig.put("retryPolicy", retryPolicy);
+
+    final Map<String, Object> serviceConfig = new HashMap<>(1);
     serviceConfig.put("methodConfig", ImmutableList.of(methodConfig));
 
     ManagedChannel channel =
