@@ -1,6 +1,11 @@
 # grpc-java-sandbox
 
-A starting point for experimenting with grpc-java.
+A starting point for experimenting with [grpc-java](https://github.com/grpc/grpc-java).
+
+## Prerequisites
+
+* Java
+* Gradle
 
 # Running the server
 
