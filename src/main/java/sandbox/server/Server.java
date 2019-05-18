@@ -1,10 +1,11 @@
-package sandbox;
+package sandbox.server;
 
 import io.grpc.ServerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sandbox.interceptors.AuthenticationInterceptor;
-import sandbox.interceptors.LoggingInterceptor;
+import sandbox.Service;
+import sandbox.server.interceptors.AuthenticationInterceptor;
+import sandbox.server.interceptors.LoggingInterceptor;
 
 import java.io.IOException;
 

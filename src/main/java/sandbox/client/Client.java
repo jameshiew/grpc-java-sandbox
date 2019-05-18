@@ -1,4 +1,4 @@
-package sandbox;
+package sandbox.client;
 
 import io.grpc.ManagedChannel;
 import io.grpc.StatusRuntimeException;
