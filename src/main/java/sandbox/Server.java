@@ -3,6 +3,7 @@ package sandbox;
 import io.grpc.ServerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sandbox.interceptors.AuthenticationInterceptor;
 import sandbox.interceptors.LoggingInterceptor;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ final class Server {
     logger.info("Building server...");
     final var server =
         ServerBuilder.forPort(8080)
+            .intercept(new AuthenticationInterceptor())
             .intercept(new LoggingInterceptor())
             .addService(new Service())
             .build();
