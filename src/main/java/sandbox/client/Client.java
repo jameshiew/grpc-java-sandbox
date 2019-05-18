@@ -1,12 +1,16 @@
 package sandbox.client;
 
+import io.grpc.ClientInterceptor;
 import io.grpc.ManagedChannel;
+import io.grpc.Metadata;
 import io.grpc.StatusRuntimeException;
 import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
+import io.grpc.stub.MetadataUtils;
 import net.hiew.sandbox.colors.ColorsGrpc;
 import net.hiew.sandbox.colors.ColorsOuterClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sandbox.client.interceptors.LoggingInterceptor;
 
 final class Client {
   private static final Logger logger = LoggerFactory.getLogger(Client.class);
@@ -18,7 +22,9 @@ final class Client {
     ManagedChannel channel =
         NettyChannelBuilder.forAddress("localhost", 8080).usePlaintext().build();
     logger.info("Creating stub...");
-    ColorsGrpc.ColorsBlockingStub stub = ColorsGrpc.newBlockingStub(channel);
+    ColorsGrpc.ColorsBlockingStub stub =
+        ColorsGrpc.newBlockingStub(channel)
+            .withInterceptors(getAuthClientInterceptor(), new LoggingInterceptor());
     logger.info("Making gRPC call...");
     try {
       final var response =
@@ -28,5 +34,11 @@ final class Client {
       logger.error("Received error response", e);
     }
     logger.info("Finished");
+  }
+
+  private static ClientInterceptor getAuthClientInterceptor() {
+    final var metadata = new Metadata();
+    metadata.put(Metadata.Key.of("AUTH_TOKEN", Metadata.ASCII_STRING_MARSHALLER), "1234");
+    return MetadataUtils.newAttachHeadersInterceptor(metadata);
   }
 }
