@@ -20,21 +20,20 @@ public final class AuthenticationInterceptor implements ServerInterceptor {
   public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
       ServerCall<ReqT, RespT> call, Metadata headers, ServerCallHandler<ReqT, RespT> next) {
     if (!EXPECTED_AUTH_TOKEN.equals(headers.get(AUTH_TOKEN_HEADER))) {
-      return close(call, Status.UNAUTHENTICATED);
+      call.close(Status.UNAUTHENTICATED, new Metadata());
+      return noopListener();
     }
     return next.startCall(call, headers);
   }
 
-  private static <ReqT, RespT> ServerCall.Listener<ReqT> close(
-      ServerCall<ReqT, RespT> call, Status status) {
-    call.close(status, new Metadata());
+  private static <ReqT> ServerCall.Listener<ReqT> noopListener() {
     return new ForwardingServerCallListener<ReqT>() {
       @Override
       protected ServerCall.Listener<ReqT> delegate() {
         return new ServerCall.Listener<ReqT>() {
           @Override
           public void onMessage(ReqT message) {
-            return;  // noop
+            return; // noop
           }
         };
       }
