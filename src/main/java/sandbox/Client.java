@@ -1,6 +1,7 @@
 package sandbox;
 
 import io.grpc.ManagedChannel;
+import io.grpc.StatusRuntimeException;
 import io.grpc.netty.shaded.io.grpc.netty.NettyChannelBuilder;
 import net.hiew.sandbox.colors.ColorsGrpc;
 import net.hiew.sandbox.colors.ColorsOuterClass;
@@ -19,8 +20,13 @@ final class Client {
     logger.info("Creating stub...");
     ColorsGrpc.ColorsBlockingStub stub = ColorsGrpc.newBlockingStub(channel);
     logger.info("Making gRPC call...");
-    final var response =
-        stub.getColor(ColorsOuterClass.GetColorRequest.newBuilder().setName("test").build());
-    logger.info("{}", response);
+    try {
+      final var response =
+          stub.getColor(ColorsOuterClass.GetColorRequest.newBuilder().setName("test").build());
+      logger.info("{}", response);
+    } catch (StatusRuntimeException e) {
+      logger.error("Received error response", e);
+    }
+    logger.info("Finished");
   }
 }
