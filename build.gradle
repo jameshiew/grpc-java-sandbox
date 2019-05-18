@@ -9,6 +9,7 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 11
 targetCompatibility = '1.11'
+final def grpcVersion = '1.20.0'
 
 repositories {
     mavenLocal()
@@ -21,7 +22,7 @@ protobuf {
     }
     plugins {
         grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.19.0'
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
     }
     generateProtoTasks {
@@ -37,8 +38,6 @@ idea {
         downloadSources = true
     }
 }
-
-final def grpcVersion = '1.20.0'
 
 dependencies {
     compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
