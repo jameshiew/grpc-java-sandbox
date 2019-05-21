@@ -14,7 +14,7 @@ final class Server {
 
   private Server() {}
 
-  public static void main(String... args) {
+  public static void start() {
     logger.info("Building server...");
     final var server =
         ServerBuilder.forPort(8080)

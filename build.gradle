@@ -53,7 +53,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'sandbox.server.Server'
+                'Main-Class': 'sandbox.server.Main'
         )
     }
     from {  // bundle all dependencies inside the .jar
