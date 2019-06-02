@@ -1,4 +1,4 @@
-package sandbox.server;
+package sandbox.colors;
 
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;

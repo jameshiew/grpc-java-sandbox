@@ -1,4 +1,4 @@
-package sandbox.server.interceptors;
+package sandbox.colors.interceptors;
 
 import io.grpc.ForwardingServerCallListener;
 import io.grpc.Metadata;

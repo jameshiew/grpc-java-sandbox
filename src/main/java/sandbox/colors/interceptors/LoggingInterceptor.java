@@ -1,4 +1,4 @@
-package sandbox.server.interceptors;
+package sandbox.colors.interceptors;
 
 import io.grpc.Metadata;
 import io.grpc.ServerCall;

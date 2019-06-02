@@ -1,10 +1,10 @@
-package sandbox.server;
+package sandbox.colors;
 
 import io.grpc.ServerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sandbox.server.interceptors.AuthenticationInterceptor;
-import sandbox.server.interceptors.LoggingInterceptor;
+import sandbox.colors.interceptors.AuthenticationInterceptor;
+import sandbox.colors.interceptors.LoggingInterceptor;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ final class Server {
   private Server() {}
 
   static void start() {
-    logger.info("Building server...");
+    logger.info("Building colors...");
     final var server =
         ServerBuilder.forPort(8080)
             .intercept(new AuthenticationInterceptor())
@@ -22,11 +22,11 @@ final class Server {
             .addService(new Service())
             .build();
 
-    logger.info("Starting server...");
+    logger.info("Starting colors...");
     try {
       server.start();
     } catch (IOException e) {
-      logger.error("Couldn't start server", e);
+      logger.error("Couldn't start colors", e);
       System.exit(1);
     }
     logger.info("Server started on port {}", server.getPort());
@@ -36,9 +36,9 @@ final class Server {
               @Override
               public void run() {
                 // Use stderr here since the logger may have been reset by its JVM shutdown hook.
-                System.err.println("*** shutting down gRPC server since JVM is shutting down");
+                System.err.println("*** shutting down gRPC colors since JVM is shutting down");
                 server.shutdown();
-                System.err.println("*** server shut down");
+                System.err.println("*** colors shut down");
               }
             });
 

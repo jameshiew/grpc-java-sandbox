@@ -1,4 +1,4 @@
-package sandbox.server;
+package sandbox.colors;
 
 public final class Main {
 
