@@ -7,7 +7,7 @@ import net.hiew.sandbox.colors.ColorsOuterClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Service extends ColorsGrpc.ColorsImplBase {
+public final class Service extends ColorsGrpc.ColorsImplBase {
   private static final Logger logger = LoggerFactory.getLogger(Service.class);
 
   private int numberOfCallsReceived;
