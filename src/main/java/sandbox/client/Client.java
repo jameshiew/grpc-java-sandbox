@@ -21,7 +21,7 @@ final class Client {
 
   private Client() {}
 
-  public static void main(String[] args) {
+  static void callGetColor() {
     logger.info("Building channel to gRPC service...");
 
     final Map<String, Object> name = new HashMap<>(1);
