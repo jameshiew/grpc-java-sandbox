@@ -3,7 +3,6 @@ package sandbox.server;
 import io.grpc.ServerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sandbox.Service;
 import sandbox.server.interceptors.AuthenticationInterceptor;
 import sandbox.server.interceptors.LoggingInterceptor;
 
@@ -14,7 +13,7 @@ final class Server {
 
   private Server() {}
 
-  public static void start() {
+  static void start() {
     logger.info("Building server...");
     final var server =
         ServerBuilder.forPort(8080)
