@@ -28,12 +28,7 @@ public final class AuthenticationInterceptor implements ServerInterceptor {
     return new ForwardingServerCallListener<ReqT>() {
       @Override
       protected ServerCall.Listener<ReqT> delegate() {
-        return new ServerCall.Listener<ReqT>() {
-          @Override
-          public void onMessage(ReqT message) {
-            return; // noop
-          }
-        };
+        return new ServerCall.Listener<ReqT>() {};
       }
     };
   }
