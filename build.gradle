@@ -53,7 +53,7 @@ dependencies {
 
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 
-//    compile group: 'me.dinowernli', name: 'java-grpc-prometheus', version: '0.3.0'
+    compile group: 'me.dinowernli', name: 'java-grpc-prometheus', version: '0.3.0'
 
     testImplementation group: 'junit', name: 'junit', version: junit4version
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.4.2'
