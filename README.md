@@ -16,4 +16,4 @@ java -jar build/libs/grpc-java-sandbox-1.0-SNAPSHOT.jar
 
 # Running the client
 
-Currently the easiest way is to run the `Client` class' `main()` method from within IntelliJ.
+Currently the easiest way is to run the `sandbox.client.Main` class' `main()` method from within IntelliJ.
