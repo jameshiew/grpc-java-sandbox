@@ -11,6 +11,7 @@ sourceCompatibility = 11
 targetCompatibility = '1.11'
 final def grpcVersion = '1.20.0'
 final def protobufVersion = '3.7.0'
+final def junit4version = '4.12'
 final def junit5version = '5.1.0'
 
 repositories {
@@ -54,13 +55,18 @@ dependencies {
 
 //    compile group: 'me.dinowernli', name: 'java-grpc-prometheus', version: '0.3.0'
 
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junit5version
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junit5version
+    testImplementation group: 'junit', name: 'junit', version: junit4version
+    testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.4.2'
+
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junit5version
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-migrationsupport', version: junit5version
+    testRuntimeOnly group: 'org.junit.vintage', name: 'junit-vintage-engine', version: junit5version
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform{
+         includeEngines 'junit-jupiter', 'junit-vintage'
+    }
 
     maxHeapSize = '1G'
 }
