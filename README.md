@@ -4,7 +4,7 @@ A starting point for experimenting with [grpc-java](https://github.com/grpc/grpc
 
 ## Prerequisites
 
-* Java
+* Java 11+
 * Gradle
 
 # Running the server
