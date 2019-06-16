@@ -1,0 +1,16 @@
+---
+stages:
+  - build
+
+build jar:
+  image: gradle:5.4.1-jdk11
+  stage: build
+  before_script:
+    - apt update
+    - apt install -y libatomic1  # needed for protoc
+  script:
+    - gradle test
+    - gradle build
+  artifacts:
+    paths:
+      - build/libs/
