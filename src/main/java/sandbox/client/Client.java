@@ -11,7 +11,7 @@ import net.hiew.sandbox.colors.ColorsGrpc;
 import net.hiew.sandbox.colors.ColorsOuterClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sandbox.client.interceptors.LoggingInterceptor;
+import sandbox.client.interceptors.LoggingClientInterceptor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +50,7 @@ final class Client {
     logger.info("Creating stub with service config {}", serviceConfig);
     ColorsGrpc.ColorsBlockingStub stub =
         ColorsGrpc.newBlockingStub(channel)
-            .withInterceptors(getAuthClientInterceptor(), new LoggingInterceptor());
+            .withInterceptors(getAuthClientInterceptor(), new LoggingClientInterceptor());
     logger.info("Making gRPC call...");
     try {
       final var response =

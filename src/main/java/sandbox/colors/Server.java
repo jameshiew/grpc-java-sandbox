@@ -3,8 +3,8 @@ package sandbox.colors;
 import io.grpc.ServerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sandbox.colors.interceptors.AuthenticationInterceptor;
-import sandbox.colors.interceptors.LoggingInterceptor;
+import sandbox.colors.interceptors.AuthenticationServerInterceptor;
+import sandbox.colors.interceptors.LoggingServerInterceptor;
 
 import java.io.IOException;
 
@@ -17,8 +17,8 @@ final class Server {
     logger.info("Building colors...");
     final var server =
         ServerBuilder.forPort(8080)
-            .intercept(new AuthenticationInterceptor())
-            .intercept(new LoggingInterceptor())
+            .intercept(new AuthenticationServerInterceptor())
+            .intercept(new LoggingServerInterceptor())
             .addService(new Service())
             .build();
 

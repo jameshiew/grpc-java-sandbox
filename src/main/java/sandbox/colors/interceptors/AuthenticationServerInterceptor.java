@@ -9,8 +9,8 @@ import io.grpc.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class AuthenticationInterceptor implements ServerInterceptor {
-  private static final Logger logger = LoggerFactory.getLogger(AuthenticationInterceptor.class);
+public final class AuthenticationServerInterceptor implements ServerInterceptor {
+  private static final Logger logger = LoggerFactory.getLogger(AuthenticationServerInterceptor.class);
 
   private static final String EXPECTED_AUTH_TOKEN = "1234";
 

@@ -7,8 +7,8 @@ import io.grpc.ServerInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class LoggingInterceptor implements ServerInterceptor {
-  private static final Logger logger = LoggerFactory.getLogger(LoggingInterceptor.class);
+public final class LoggingServerInterceptor implements ServerInterceptor {
+  private static final Logger logger = LoggerFactory.getLogger(LoggingServerInterceptor.class);
 
   @Override
   public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(
