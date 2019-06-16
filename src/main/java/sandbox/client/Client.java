@@ -21,7 +21,7 @@ final class Client {
 
   private Client() {}
 
-  static void callGetColor() {
+  private static ManagedChannel constructChannel() {
     logger.info("Building channel to gRPC service...");
 
     final Map<String, Object> name = new HashMap<>(1);
@@ -41,15 +41,20 @@ final class Client {
     final Map<String, Object> serviceConfig = new HashMap<>(1);
     serviceConfig.put("methodConfig", ImmutableList.of(methodConfig));
 
-    ManagedChannel channel =
+    final var channel =
         NettyChannelBuilder.forAddress("localhost", 8080)
             .usePlaintext()
             .enableRetry()
             .defaultServiceConfig(serviceConfig)
             .build();
-    logger.info("Creating stub with service config {}", serviceConfig);
+    logger.debug("Channel is using config {}", serviceConfig);
+    return channel;
+  }
+
+  static void callGetColor() {
+    logger.info("Creating stub");
     ColorsGrpc.ColorsBlockingStub stub =
-        ColorsGrpc.newBlockingStub(channel)
+        ColorsGrpc.newBlockingStub(constructChannel())
             .withInterceptors(getAuthClientInterceptor(), new LoggingClientInterceptor());
     logger.info("Making gRPC call...");
     try {
