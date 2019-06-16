@@ -4,7 +4,7 @@ import io.grpc.ServerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sandbox.colors.interceptors.AuthenticationServerInterceptor;
-import sandbox.colors.interceptors.EachMessageServerInterceptor;
+import sandbox.colors.interceptors.DisallowRedServerInterceptor;
 import sandbox.colors.interceptors.LoggingServerInterceptor;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ final class Server {
         ServerBuilder.forPort(8080)
             .intercept(new AuthenticationServerInterceptor())
             .intercept(new LoggingServerInterceptor())
-            .intercept(new EachMessageServerInterceptor())
+            .intercept(new DisallowRedServerInterceptor())
             .addService(new Service())
             .build();
 

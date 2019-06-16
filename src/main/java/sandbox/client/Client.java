@@ -59,7 +59,7 @@ final class Client {
     logger.info("Making gRPC call...");
     try {
       final var response =
-          stub.getColor(ColorsOuterClass.GetColorRequest.newBuilder().setName("test").build());
+          stub.getColor(ColorsOuterClass.GetColorRequest.newBuilder().setName("red").build());
       logger.info("{}", response);
     } catch (StatusRuntimeException e) {
       logger.error("Received error response", e);
