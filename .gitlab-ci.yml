@@ -3,7 +3,7 @@ stages:
   - build
 
 build jar:
-  image: gradle:5.4.1-jdk11
+  image: gradle:6.3.0-jdk11
   stage: build
   before_script:
     - apt update
