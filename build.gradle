@@ -10,7 +10,7 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 11
 targetCompatibility = '1.11'
 final def grpcVersion = '1.41.0'
-final def protobufVersion = '3.18.1'
+final def protobufVersion = '3.21.5'
 final def junit4version = '4.13.2'
 final def junit5version = '5.8.1'
 
